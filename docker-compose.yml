@@ -1,0 +1,14 @@
+web:
+  restart: always
+  command: nodemon
+  build: .
+  ports:
+   - 3000:3000
+  volumes:
+   - .:/usr/src/app
+   - /tmp:/tmp
+  links:
+   - selenium
+  env_file: .env
+selenium:
+  image: selenium/standalone-chrome:2.48.2
