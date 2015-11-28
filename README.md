@@ -18,20 +18,20 @@ the first represents the time of data collection scrape:
 ## Setup
 
 Everything is set up using [Docker Compose](https://docs.docker.com/compose/).
-Once ou have it installed, set the following environment variables in a file
+Once you have it installed, set the following environment variables in a file
 called `.env`:
 
 - `GITHUB_ACCESS_TOKEN` - GitHub access token for the account you want to submit
-  the pull requests from. Must have the `repo` permission.
+  the pull requests from. Must have the `repo` permission
 - `GITHUB_REPO_URL` - URL of the upstream repository you want your account
   submitting pull requests to. This will be forked and not modified directly.
 - `SLACK_SUBDOMAIN` - Subdomain for the Slack you want to gather statistics
-  from (ex. `myteam` in `https://myteam.slack.com`).
+  from (ex. `myteam` in `https://myteam.slack.com`)
 - `SLACK_EMAIL` - Email for the administrator account to use for gathering the
-  Slack statistics. We recomment creating a separate account just for this
+  Slack statistics. We recommend creating a separate account just for this
   project.
-- `SLACK_PASSWORD` - Password for the aforementioned Slack account.
-- _(Optional)_ `PORT` - Port for the HTTP server to run on.
+- `SLACK_PASSWORD` - Password for the aforementioned Slack account
+- _(Optional)_ `PORT` - Port for the HTTP server to run on
 
 Once you have all of those set, just run the following and you should be good to
 go!
@@ -46,7 +46,7 @@ Once up and running, the project exposes the following endpoints:
   the JSON output
 - `POST /make-pull-request` - Scrapes `https://subdomain.slack.com/admin/stats`,
   converts the scraped data to a TSV, and submits a pull request with the
-  changed data to the GitHub repository in `GITHUB_REPO_URL`.
+  changed data to the GitHub repository in `GITHUB_REPO_URL`
 
 Responses are only returned after the action is fully complete. Since scraping
 data from Slack's admin dashboard and all the git-fu can take a while, it can
