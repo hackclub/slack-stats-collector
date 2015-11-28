@@ -3,7 +3,7 @@
 import http from 'http';
 import express from 'express';
 import { getStats } from './statsCollector.js';
-import { makePullRequest } from './pullRequestSweatShop.js'
+import { makePullRequest } from './pullRequestShop.js'
 
 const githubAccessToken = process.env.GITHUB_ACCESS_TOKEN;
 const githubRepoURL = process.env.GITHUB_REPO_URL;
