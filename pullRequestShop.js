@@ -134,7 +134,6 @@ function updateFork(octo, accessToken, forkPath, upstreamURL) {
 
 // Creates a new branch in the repo in repoPath with branchName
 function createBranch(repoPath, branchName) {
-  console.log(repoPath)
   return Git.Repository.open(repoPath)
     .then(repo => {
       return repo.getHeadCommit()
