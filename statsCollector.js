@@ -17,11 +17,11 @@ const options = {
 //   "members": {
 //     "exampleUser": {
 //       "last7Days": 242,
-//       "alltime": 1382
+//       "allTime": 1382
 //     },
 //     "zrl": {
 //       "last7Days": 421,
-//       "alltime": 3232
+//       "allTime": 3232
 //     }
 //   }
 // }
