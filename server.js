@@ -16,9 +16,7 @@ app.server = http.createServer(app);
 
 app.get('/stats', (req, res) => {
   getStats(slackSubdomain, slackEmail, slackPassword)
-    .then(stats => {
-      res.json(stats);
-    })
+    .then(stats => res.json(stats))
     .catch(err => {
       console.error(err);
       res.json({ error: err });
@@ -27,16 +25,12 @@ app.get('/stats', (req, res) => {
 
 app.post('/make-pull-request', (req, res) => {
   getStats(slackSubdomain, slackEmail, slackPassword)
-    .then(stats => {
-      return makePullRequest(
-        githubAccessToken,
-        githubRepoURL,
-        stats
-      )
-    })
-    .then(result => {
-      res.json(result);
-    })
+    .then(stats => makePullRequest(
+      githubAccessToken,
+      githubRepoURL,
+      stats
+    ))
+    .then(result => res.json(result))
     .catch(err => {
       console.error(err.stack);
       res.json({ error: err });
