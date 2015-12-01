@@ -1,0 +1,21 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - curl -Ls https://install.convox.com/linux.zip > /tmp/convox.zip
+      && sudo unzip /tmp/convox.zip -d /usr/local/bin
+
+test:
+  override:
+    - echo "No tests!"
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - convox login $CONVOX_HOST --password $CONVOX_PASSWORD
+      - git clone --recursive git://github.com/hackclub/slack-stats-collector /tmp/slack-stats-collector
+        && cd /tmp/slack-stats-collector
+        && convox deploy | sed 's/docker .*/docker ********/'
