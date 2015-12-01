@@ -40,6 +40,40 @@ class SlackStatsTable {
     this.userStats[user][date] = msgCount;
   }
 
+  // Loads data into the current SlackStatsTable from a TSV string
+  loadTSV(tsvData) {
+    let tsv = [];
+
+    // Remove trailing newlines
+    tsvData = tsvData.replace(/\n+$/, '');
+
+    _.each(tsvData.split('\n'), line => {
+      let row = [];
+
+      _.each(line.split('\t'), column => row.push(column));
+      tsv.push(row);
+    });
+
+    let dates = [];
+
+    // Populate the dates array from the header row (ignore the first element
+    // since it's the header for the user list)
+    _.each(tsv[0].slice(1, tsv[0].length), d => dates.push(new Date(d)));
+
+    // Iterate over each of the rows (skip the first row, since it's the
+    // headers) and add the message count for each user and date to the table.
+    for (let i = 1; i < tsv.length; i++) {
+      let row = tsv[i];
+
+      let username = row[0];
+
+      // Iterate through each of the totals and add its message count with its
+      // associated date
+      _.each(row.slice(1, row.length),
+             (t, i) => this.setMsgCount(username, dates[i], Number(t)));
+    }
+  }
+
   // Returns a TSV string of the SlackStatsTable
   tsv() {
     let sortedDates = this.dates.sort();
@@ -181,16 +215,23 @@ function updateTSVWithStats(forkPath, tsvFilename, slackStats) {
   let tsvPath = path.resolve(forkPath, tsvFilename);
   let statsTable = new SlackStatsTable;
 
-  // TODO load tsvPath into statsTable before doing this
-  _.each(slackStats.members, (stats, user) => {
-    statsTable.setMsgCount(user, slackStats.timestamp, stats.allTime);
-  });
+  return fsp.readFile(tsvPath, 'utf8')
+    .then(data => {
+      // Load the existing data into our table
+      statsTable.loadTSV(data);
 
-  let statsTSV = statsTable.tsv();
+      // Load the latest Slack stats data into the table
+      _.each(slackStats.members, (stats, user) => {
+        statsTable.setMsgCount(user, slackStats.timestamp, stats.allTime);
+      });
 
-  return fsp.writeFile(tsvPath, statsTSV)
-    .then(() => {
-      return [forkPath, tsvFilename];
+      // Export!
+      let statsTSV = statsTable.tsv();
+
+      return fsp.writeFile(tsvPath, statsTSV)
+        .then(() => {
+          return [forkPath, tsvFilename];
+        });
     });
 }
 
