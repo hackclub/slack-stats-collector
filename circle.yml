@@ -3,7 +3,7 @@ machine:
     - docker
 
 dependencies:
-  pre:
+  override:
     - curl -Ls https://install.convox.com/linux.zip > /tmp/convox.zip
       && sudo unzip /tmp/convox.zip -d /usr/local/bin
 
