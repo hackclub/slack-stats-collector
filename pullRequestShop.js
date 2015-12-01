@@ -286,7 +286,11 @@ function createPullRequest(octo, repo, slackStats, branchName) {
 
 As of ${date.toUTCString()}, there have been ${totalMsgs} messages sent in the Slack. The most active user of all time is \`${allTimeMostActive}\`, who has sent ${slackStats.members[allTimeMostActive].allTime} messages in total. The most active user in the past 7 days is \`${last7DaysMostActive}\`, who sent ${slackStats.members[last7DaysMostActive].last7Days} messages.
 
-_Note: all times are UTC._`;
+_Note: all times are UTC._
+
+--------------------------------------------------------------------------------
+
+_This pull request is brought to you by [\`slack-stats-collector\`](https://github.com/hackclub/slack-stats-collector)_`;
 
   return octo.me.fetch()
     .then(me => {
