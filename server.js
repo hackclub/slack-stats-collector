@@ -14,6 +14,8 @@ const slackPassword = process.env.SLACK_PASSWORD;
 let app = express();
 app.server = http.createServer(app);
 
+app.get('/ping', (req, res) => res.send('PONG'));
+
 app.get('/stats', (req, res) => {
   getStats(slackSubdomain, slackEmail, slackPassword)
     .then(stats => res.json(stats))
