@@ -76,7 +76,7 @@ class SlackStatsTable {
 
   // Returns a TSV string of the SlackStatsTable
   tsv() {
-    let sortedDates = this.dates.sort();
+    let sortedDates = this.dates.sort((a, b) => a - b);
     let headers = ['Users'].concat(sortedDates.map(d => d.toISOString()));
     let userRows = [];
     let exportStr = '';
