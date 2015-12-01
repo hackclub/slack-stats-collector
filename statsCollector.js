@@ -4,8 +4,8 @@ import cheerio from 'cheerio';
 import webdriverio from 'webdriverio';
 const options = {
   desiredCapabilities: { browserName: 'chrome' },
-  host: process.env.SELENIUM_PORT_4444_TCP_ADDR,
-  port: process.env.SELENIUM_PORT_4444_TCP_PORT
+  host: process.env.SELENIUM_HOST || process.env.SELENIUM_PORT_4444_TCP_ADDR,
+  port: process.env.SELENIUM_PORT || process.env.SELENIUM_PORT_4444_TCP_PORT
 };
 
 // Go to Slack's admin statistics page, grabs all the member data, then returns

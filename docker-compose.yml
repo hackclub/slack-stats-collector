@@ -3,6 +3,8 @@ web:
   command: nodemon
   build: .
   ports:
+   - 80:3000
+   - 443:3000
    - 3000:3000
   volumes:
    - .:/usr/src/app
@@ -12,3 +14,5 @@ web:
   env_file: .env
 selenium:
   image: selenium/standalone-chrome:2.48.2
+  ports:
+   - 4444:4444

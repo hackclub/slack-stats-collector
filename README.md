@@ -32,6 +32,10 @@ called `.env`:
   project.
 - `SLACK_PASSWORD` - Password for the aforementioned Slack account
 - _(Optional)_ `PORT` - Port for the HTTP server to run on
+- _(Optional)_ `SELENIUM_HOST` - Override the default linked Selenium Docker
+  container host
+- _(Optional)_ `SELENIUM_PORT` - Override the default linked Selenium Docker
+  container port
 
 Once you have all of those set, just run the following and you should be good to
 go!
