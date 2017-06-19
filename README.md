@@ -1,5 +1,9 @@
 # slack-stats-collector [![Circle CI](https://circleci.com/gh/hackclub/slack-stats-collector.svg?style=svg)](https://circleci.com/gh/hackclub/slack-stats-collector)
 
+_**Caution: this repository is no longer maintained.**_
+
+---
+
 slack-stats-collector scrapes the `https://subdomain.slack.com/admin/stats`
 page, turns it into a TSV file, and then submits a pull request with the latest
 changes to your GitHub repository of choice. Now you can track your Slack usage
